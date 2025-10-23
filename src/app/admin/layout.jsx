@@ -4,12 +4,14 @@ import React, { useEffect, useState } from "react";
 import { FiHome, FiSettings, FiUser, FiMenu, FiX, FiSearch, FiBell, FiMessageSquare, FiBook, FiUsers, FiBarChart, FiCamera, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { LuPackageCheck } from "react-icons/lu";
 import { MdRoomService } from "react-icons/md";
-import { IoIosArrowDown,IoIosArrowUp} from "react-icons/io";
+import { IoIosArrowDown,IoIosArrowUp,IoMdLogOut} from "react-icons/io";
+
 
 import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 import axios from "axios";
 import { baseurl } from "../component/urls";
+import { useRouter } from "next/navigation";
 
 
 const Layout = ({ children }) => {
@@ -17,7 +19,7 @@ const Layout = ({ children }) => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [toggle,setToggle]=useState("")
   const [userData,setUserData]= useState();
- 
+  const router = useRouter()
   
   const menuItems = [
     { icon: FiHome, label: "Dashboard", href: "#" },
@@ -56,10 +58,48 @@ const getUser=async()=>{
 }
 
 
+const fetchAdmin = async () => {
+      try {
+        const response = await axios.get(`${baseurl}/admin/getadmin`, {
+          withCredentials: true, // important for cookies
+        });
+
+        const data = response.data;
+
+        if (data.success && data.admin) {
+          // ✅ Admin verified — you can store admin data in state if needed
+          console.log("Admin verified:", data.admin);
+        } else {
+          // ❌ Not logged in — redirect to admin login
+          router.push("/login/admin");
+        }
+      } catch (error) {
+        router.push("/login/admin");
+      }
+    };
+
+
 
 useEffect(()=>{
+  fetchAdmin()
   getUser()
 },[])
+
+
+
+const handellogout= async()=>{
+  const response = await axios.get(`${baseurl}/admin/logout`,{
+    withCredentials:true
+  })
+  const data = await response.data;
+   
+  if(data.success){
+    router.push("/login/admin");
+  }
+
+
+
+}
 
 
 
@@ -216,7 +256,21 @@ useEffect(()=>{
           </button>
         )}
 
-        {/* User Profile Section */}
+       <div
+       
+       onClick={handellogout}
+          className={`flex items-center gap-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors group
+            px-3 cursor-pointer  mx-3 py-3`}
+         
+        >
+          <IoMdLogOut className="text-lg text-gray-400 group-hover:text-blue-600 flex-shrink-0" />
+         
+            <span className="font-medium whitespace-nowrap">Logout</span>
+      
+        </div>
+
+
+
         <div className={`absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 bg-white 
           ${sidebarCollapsed ? "flex justify-center" : ""}`}>
           <div className={`flex items-center gap-3 ${sidebarCollapsed ? "justify-center" : ""}`}>
@@ -263,6 +317,8 @@ useEffect(()=>{
 
             {/* Right side - Notifications and User */}
             <div className="flex items-center gap-4">
+
+           
               {/* Notifications */}
               <button className="p-2 rounded-lg hover:bg-gray-100 relative">
                 <FiBell className="text-lg text-gray-600" />

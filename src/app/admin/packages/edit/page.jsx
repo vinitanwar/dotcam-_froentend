@@ -2,7 +2,7 @@
 
 import { baseurl } from '@/app/component/urls';
 import axios from 'axios';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams ,useRouter} from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { 
   FiCalendar, 
@@ -22,6 +22,7 @@ import {
 import Swal from 'sweetalert2';
 
 const Page = () => {
+  const route= useRouter()
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
    const [formData, setFormData] = useState({
