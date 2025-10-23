@@ -21,10 +21,9 @@ import {
 } from 'react-icons/fi';
 import Swal from 'sweetalert2';
 
-const Page = () => {
+const Page = ({params:{slug}}) => {
   const route= useRouter()
-  const searchParams = useSearchParams();
-  const id = searchParams.get('id');
+
    const [formData, setFormData] = useState({
       package_duration: '',
       passtype: '',
@@ -50,7 +49,7 @@ const Page = () => {
   };
 
 const fetchpackage=async()=>{
-  const response = await axios.get (`${baseurl}/package/${id}`);
+  const response = await axios.get (`${baseurl}/package/${slug}`);
   const data = await response.data;
  
   if(data.success){
@@ -73,7 +72,7 @@ const handleSubmit = async(e) => {
       pass_details: details
     };
 
- const response = await axios.post(`${baseurl}/package/edit/${id}`,finalData)
+ const response = await axios.post(`${baseurl}/package/edit/${slug}`,finalData)
 const data = await response.data;
 if(data.success){
   Swal.fire({

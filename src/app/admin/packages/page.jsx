@@ -140,7 +140,7 @@ if(data.success){
                     <td className="px-6 py-4">{pkg.pass_des}</td>
                     <td className="px-6 py-4 flex gap-3 text-xl">
                       <Link
-                        href={`edit?id=${pkg.id}`}
+                        href={`${pkg.id}`}
                         className="text-blue-600 hover:underline"
                       >
                         <MdEdit />
