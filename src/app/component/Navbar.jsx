@@ -174,7 +174,7 @@ export default function Navbar() {
                 Our Blog
               </Link>
             </li>
-            <li className="border-b pb-4 px-6 md:px-10 border-[#18181e]">
+            {/* <li className="border-b pb-4 px-6 md:px-10 border-[#18181e]">
               <Link
                 href="/pricing"
                 className="hover:text-[#e7000b] transition"
@@ -182,7 +182,7 @@ export default function Navbar() {
               >
                 Pricing Package
               </Link>
-            </li>
+            </li> */}
             <li className="border-b pb-4 px-6 md:px-10 border-[#18181e]">
               <Link
                 href="/auth"

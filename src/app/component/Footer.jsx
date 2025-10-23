@@ -13,7 +13,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center bg-black my-9 py-10 lg:py-40">
+    <div className="flex items-center justify-center bg-black py-10 lg:py-40">
       <div className="relative w-full max-w-6xl block lg:flex justify-center items-center">
         {/* Desktop View - 3 Videos side by side */}
         <div

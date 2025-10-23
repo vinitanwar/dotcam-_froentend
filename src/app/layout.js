@@ -2,6 +2,7 @@ import "./globals.css";
 import Footer from "./component/Footer";
 import Navbar from "./component/Navbar";
 import { Inter } from "next/font/google";
+import InnerLayout from "./InnerLayout";
 
 export const metadata = {
   title: "dotcam.ca",
@@ -13,12 +14,17 @@ const inter = Inter({ subsets: ["latin"] });
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head></head>
-      <body className={`${inter.className} bg-black pl-0 md:pl-[75px]`}>
-        <Navbar />
-        <div className="mt-10 md:mt-0"></div>
+      <head>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Chonburi&display=swap" rel="stylesheet"></link>
+
+      </head>
+      <body className={`${inter.className} `}>
+       <InnerLayout>
+
         {children}
-        <Footer />
+       </InnerLayout>
       </body>
     </html>
   );

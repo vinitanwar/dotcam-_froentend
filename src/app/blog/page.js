@@ -90,7 +90,7 @@ export default function Page() {
                     </div>
                   </Link>
                   <div className="p-5">
-                    <p className="text-sm bg-red-800 w-max px-3 py-1 rounded-lg text-white">
+                    <p   className="text-sm bg-red-800 w-max px-3 py-1 rounded-lg text-white">
                       {date}
                     </p>
                     <h3 className="text-lg font-semibold mt-2 mb-3 text-white hover:text-red-800 transition">
